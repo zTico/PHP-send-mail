@@ -36,7 +36,7 @@
     $mensagem->__set('mensagem', $_POST['mensagem']);
     echo $mensagem->mensagemValida();
    
-    echo '<pre>';  var_dump($mensagem);
+    //echo '<pre>';  var_dump($mensagem);
     
     if(!$mensagem->mensagemValida()){
         header('Location:index.php?erro=Mensagem_Não_Enviada');
