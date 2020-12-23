@@ -40,6 +40,7 @@
     
     if(!$mensagem->mensagemValida()){
         header('Location:index.php?erro=Mensagem_Não_Enviada');
+        die();
     } 
 
     $mail = new PHPMailer(true);
