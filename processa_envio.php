@@ -7,7 +7,7 @@
     
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-
+    $tamanho = 2097152;
     class Mensagem {
         private $para = null;
         private $assunto = null;
@@ -21,7 +21,7 @@
         }
         public function mensagemValida(){
 
-            if(!empty(strlen($this->para)) && !empty(strlen($this->assunto)) && !empty(strlen($this->mensagem))) {
+            if(!empty(strlen($this->para)) && !empty(strlen($this->assunto)) && !empty(strlen($this->mensagem)) && isset($this->arquivo)) {
                 return true;
             } 
             else {
@@ -33,11 +33,18 @@
     $mensagem = new Mensagem();
     $mensagem->__set('para', $_POST['para']);
     $mensagem->__set('assunto', $_POST['assunto']);
+    $mensagem->__set('arquivo', $_FILES['arquivo']);
+    $file = $mensagem->__get('arquivo');
     $mensagem->__set('mensagem', $_POST['mensagem']);
     echo $mensagem->mensagemValida();
    
     //echo '<pre>';  var_dump($mensagem);
     
+    if($file['size'] > $tamanho){
+        die();
+        header('Location:index.php?erro=Arquivo_muito_grande');
+    }
+
     if(!$mensagem->mensagemValida()){
         header('Location:index.php?erro=Mensagem_Não_Enviada');
         die();
@@ -122,6 +129,7 @@
             </body>
         </html>';
        // $mail->AltBody = 'Mensagem al email:';
+        $mail->addAttachment($file['tmp_name'], $file['name']);
 
         $mail->send();
        
