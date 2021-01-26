@@ -34,6 +34,11 @@
 								<label for="assunto">Assunto</label>
 								<input type="text" class="form-control" name="assunto" placeholder="Assundo do e-mail">
 							</div>
+							
+							<div class="form-group">
+								<label >Selecione o arquivo</label>
+								<input type="file" class="form-control-file" name="arquivo">
+							</div>
 
 							<div class="form-group">
 								<label for="mensagem">Mensagem</label>
