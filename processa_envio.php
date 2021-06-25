@@ -41,13 +41,13 @@
     //echo '<pre>';  var_dump($mensagem);
     
     if($file['size'] > $tamanho){
-        die();
         header('Location:index.php?erro=Arquivo_muito_grande');
+        exit();
     }
 
     if(!$mensagem->mensagemValida()){
         header('Location:index.php?erro=Mensagem_Não_Enviada');
-        die();
+        exit();
     } 
 
     $mail = new PHPMailer(true);
